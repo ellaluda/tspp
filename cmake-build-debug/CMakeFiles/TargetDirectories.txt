@@ -1,0 +1,3 @@
+/Users/ella/CLionProjects/tspp_task1/cmake-build-debug/CMakeFiles/tspp_task1.dir
+/Users/ella/CLionProjects/tspp_task1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/ella/CLionProjects/tspp_task1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
