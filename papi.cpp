@@ -136,39 +136,23 @@ int main () {
     CHECK_PAPI_ERROR(PAPI_event_name_to_code("perf::PERF_COUNT_HW_CACHE_REFERENCES", &code), "Custom event code conversion");
     CHECK_PAPI_ERROR(PAPI_add_event(Eventset, code), "Add custom event");
 
-
-    
-
     for (int n_test = 0; n_test < N_TESTS; n_test++) {
     CSR_graph a;
     a.read(filenames[n_test]);
     std::cout << filenames[n_test] << std::endl;
 
-    // 开始计数
     CHECK_PAPI_ERROR(PAPI_start(Eventset), "PAPI_start");
-
     std::cout << "max vertex:" << a.find_max_weight_to_even_vertex() << std::endl;
-
-    // 停止计数
     CHECK_PAPI_ERROR(PAPI_stop(Eventset, values), "PAPI_stop");
-
     std::cout << "alg1: L1_TCM: " << values[0] << " L2_TCM: " << values[1] << " custom: " << values[2] << std::endl;
-
-    // 重置计数器
     CHECK_PAPI_ERROR(PAPI_reset(Eventset), "PAPI_reset");
 
-    // 开始计数
     CHECK_PAPI_ERROR(PAPI_start(Eventset), "PAPI_start");
-
     std::cout << "max weight ver:" << a.find_max_rank_vertex() << std::endl;
-
-    // 停止计数
     CHECK_PAPI_ERROR(PAPI_stop(Eventset, values), "PAPI_stop");
-
     std::cout << "alg2: L1_TCM: " << values[0] << " L2_TCM: " << values[1] << " PAPI_TOT_INS: " << values[2] << std::endl;
 }
 
-// 关闭PAPI库
 PAPI_shutdown();
 
 return 0;
