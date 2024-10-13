@@ -119,20 +119,14 @@ int main () {
     long long values[3];
     int Eventset = PAPI_NULL, code;
 
-    // Initialize PAPI library
     CHECK_PAPI_ERROR(PAPI_library_init(PAPI_VER_CURRENT) == PAPI_VER_CURRENT ? PAPI_OK : PAPI_EINVAL, "Library init");
-
-    // Create event set
     CHECK_PAPI_ERROR(PAPI_create_eventset(&Eventset), "Event set creation");
 
-    // Add L1 cache miss event
     CHECK_PAPI_ERROR(PAPI_event_name_to_code("PAPI_L1_TCM", &code), "L1_TCM code conversion");
     CHECK_PAPI_ERROR(PAPI_add_event(Eventset, code), "Add L1_TCM event");
 
-    // Add L2 cache miss event
     CHECK_PAPI_ERROR(PAPI_add_event(Eventset, PAPI_L2_TCM), "Add L2_TCM event");
 
-    // Add custom cache references event
     CHECK_PAPI_ERROR(PAPI_event_name_to_code("perf::PERF_COUNT_HW_CACHE_REFERENCES", &code), "Custom event code conversion");
     CHECK_PAPI_ERROR(PAPI_add_event(Eventset, code), "Add custom event");
 
@@ -145,6 +139,7 @@ int main () {
     std::cout << "max vertex:" << a.find_max_weight_to_even_vertex() << std::endl;
     CHECK_PAPI_ERROR(PAPI_stop(Eventset, values), "PAPI_stop");
     std::cout << "alg1: L1_TCM: " << values[0] << " L2_TCM: " << values[1] << " custom: " << values[2] << std::endl;
+
     CHECK_PAPI_ERROR(PAPI_reset(Eventset), "PAPI_reset");
 
     CHECK_PAPI_ERROR(PAPI_start(Eventset), "PAPI_start");
