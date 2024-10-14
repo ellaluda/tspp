@@ -122,14 +122,11 @@ int main () {
     CHECK_PAPI_ERROR(PAPI_library_init(PAPI_VER_CURRENT) == PAPI_VER_CURRENT ? PAPI_OK : PAPI_EINVAL, "Library init");
     CHECK_PAPI_ERROR(PAPI_create_eventset(&Eventset), "Event set creation");
 
-    CHECK_PAPI_ERROR(PAPI_event_name_to_code("PAPI_L1_TCM", &code), "L1_TCM code conversion");
-    CHECK_PAPI_ERROR(PAPI_add_event(Eventset, code), "Add L1_TCM event");
+    CHECK_PAPI_ERROR(PAPI_add_event(Eventset, PAPI_L1_TCM), "Add L1_TCM event");
 
     CHECK_PAPI_ERROR(PAPI_add_event(Eventset, PAPI_L2_TCM), "Add L2_TCM event");
 
-    // Replace PERF_COUNT_HW_CACHE_REFERENCES with PAPI_TOT_INS
-    CHECK_PAPI_ERROR(PAPI_event_name_to_code("PAPI_TOT_INS", &code), "PAPI_TOT_INS code conversion");
-    CHECK_PAPI_ERROR(PAPI_add_event(Eventset, code), "Add PAPI_TOT_INS event");
+    CHECK_PAPI_ERROR(PAPI_add_event(Eventset, PAPI_TOT_INS), "Add PAPI_TOT_INS event");
 
     for (int n_test = 0; n_test < N_TESTS; n_test++) {
         CSR_graph a;
