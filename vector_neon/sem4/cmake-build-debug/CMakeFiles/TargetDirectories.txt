@@ -1,0 +1,3 @@
+/Users/ella/CLionProjects/sem4/cmake-build-debug/CMakeFiles/sem4.dir
+/Users/ella/CLionProjects/sem4/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/ella/CLionProjects/sem4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
